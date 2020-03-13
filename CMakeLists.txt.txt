@@ -1,0 +1,33 @@
+set(CMAKE_CXX_STANDARD 14)
+
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+find_package( PkgConfig REQUIRED)
+
+pkg_search_module( TESSERACT REQUIRED tesseract )
+
+pkg_search_module( LEPTONICA REQUIRED lept )
+
+include_directories( ${TESSERACT_INCLUDE_DIRS} )
+
+include_directories( ${LEPTONICA_INCLUDE_DIRS} )
+
+link_directories( ${TESSERACT_LIBRARY_DIRS} )
+
+link_directories( ${LEPTONICA_LIBRARY_DIRS} )
+
+find_package( OpenCV REQUIRED )
+
+include_directories("myfirst.h")
+
+file(GLOB SOURCES "myfirst.cpp")
+
+add_executable(myfirst ${SOURCES})
+
+target_link_libraries( myfirst ${OpenCV_LIBS} )
+
+target_link_libraries( myfirst ${TESSERACT_LIBRARIES} )
+
+target_link_libraries( myfirst ${LEPTONICA_LIBRARIES} )
